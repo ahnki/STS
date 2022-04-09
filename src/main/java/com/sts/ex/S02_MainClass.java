@@ -2,10 +2,6 @@ package com.sts.ex;
 
 public class S02_MainClass {
 
-	public S02_MainClass() {
-		// TODO Auto-generated constructor stub
-	}
-
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
 
