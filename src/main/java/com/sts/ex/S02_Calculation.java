@@ -29,12 +29,12 @@ public class S02_Calculation {
 		System.out.println(firstNum + " - " + secondNum + " = " + (firstNum - secondNum));
 	}
 	
-	public void multi() {
+	public void mul() {
 		System.out.println("multi()");
 		System.out.println(firstNum + " * " + secondNum + " = " + (firstNum * secondNum));
 	}
 	
-	public void divide() {
+	public void div() {
 		System.out.println("divice()");
 		System.out.println(firstNum + " / " + secondNum + " = " + (firstNum / secondNum));
 	}

@@ -10,8 +10,8 @@ public class S02_MainClass {
 		
 		cal.add();
 		cal.sub();
-		cal.multi();
-		cal.divide();
+		cal.mul();
+		cal.div();
 	}
 
 }
