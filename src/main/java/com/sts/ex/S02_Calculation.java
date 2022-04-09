@@ -1,6 +1,7 @@
 package com.sts.ex;
 
 public class S02_Calculation {
+	//
 	
 	private int firstNum;
 	private int secondNum;
