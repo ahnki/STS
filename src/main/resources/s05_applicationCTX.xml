@@ -30,4 +30,7 @@
 		<ref bean="student1"/>
 	</constructor-arg>
 </bean>
+
+<bean id="pencil" class="com.sts.ex.S05_Pencil6B"/>
+
 </beans>
