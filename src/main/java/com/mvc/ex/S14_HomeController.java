@@ -56,4 +56,24 @@ public class S14_HomeController {
 		System.out.println("student");
 		return "s14_studentInfo";
 	}
+	
+	@RequestMapping("/s14_studentConfirm")
+	public String studentRedirect(HttpServletRequest request, Model model) {
+		String id = request.getParameter("id");
+		if(id.equals("abc")) {
+			return "redirect:s14_studentOk";
+		}
+		
+		return "redirect:s14_studentNg";
+	}
+	
+	@RequestMapping("/s14_studentOk")
+	public String studentOk(Model model) {
+		return "s14_studentOk";
+	}
+	
+	@RequestMapping("/s14_studentNg")
+	public String studentNg(Model model) {
+		return "s14_studentNg";
+	}
 }
