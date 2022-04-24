@@ -8,7 +8,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 @Controller
-@RequestMapping("/bbs")
 public class S17_BController {
 
 	S17_BCommand command;
@@ -20,7 +19,7 @@ public class S17_BController {
 		command = new S17_BListCommand();
 		command.execute(model);
 		
-		return "bbs/s17_list";
+		return "s17_list";
 	}
 	
 	@RequestMapping("/s17_writeView")
@@ -28,7 +27,7 @@ public class S17_BController {
 		
 		System.out.println("S17_BController : writeView()");
 		
-		return "bbs/s17_writeView";
+		return "s17_writeView";
 	}
 	
 	@RequestMapping("/s17_write")
@@ -39,7 +38,7 @@ public class S17_BController {
 		command = new S17_BWriteCommand();
 		command.execute(model);
 		
-		return "redirect:bbs/s17_list";
+		return "redirect:s17_list";
 	}
 	
 	@RequestMapping("/s17_contentView")
@@ -50,7 +49,7 @@ public class S17_BController {
 		command = new S17_BContentCommand();
 		command.execute(model);
 		
-		return "bbs/s17_contentView";
+		return "s17_contentView";
 	}
 	
 	@RequestMapping(method = RequestMethod.POST, value = "/s17_modify")
@@ -61,7 +60,7 @@ public class S17_BController {
 		command = new S17_BModifyCommand();
 		command.execute(model);
 		
-		return "redirect:bbs/s17_list";
+		return "redirect:s17_list";
 	}
 	
 	@RequestMapping("/s17_replyView")
@@ -72,7 +71,7 @@ public class S17_BController {
 		command = new S17_BReplyViewCommand();
 		command.execute(model);
 		
-		return "bbs/s17_replyView";
+		return "s17_replyView";
 	}
 	
 	@RequestMapping("/s17_reply")
@@ -83,7 +82,7 @@ public class S17_BController {
 		command = new S17_BReplyCommand();
 		command.execute(model);
 		
-		return "redirect:bbs/s17_list";
+		return "redirect:s17_list";
 	}
 	
 	@RequestMapping("/s17_delete")
@@ -94,6 +93,6 @@ public class S17_BController {
 		command = new S17_BDeleteCommand();
 		command.execute(model);
 		
-		return "redirect:bbs/s17_list";
+		return "redirect:s17_list";
 	}
 }

@@ -18,6 +18,10 @@ public class S17_BContentCommand implements S17_BCommand {
 		HttpServletRequest request = (HttpServletRequest) map.get("request");
 		String bId = request.getParameter("bId");
 		
+		S17_BDao dao = new S17_BDao();
+		S17_BDto dto = dao.contentView(bId);
+		
+		model.addAttribute("contentView", dto);
 	}
 
 }
