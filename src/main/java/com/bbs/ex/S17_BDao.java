@@ -23,6 +23,65 @@ public class S17_BDao {
 		}
 	}
 	
+	public void delete(String bId) {
+		Connection connection = null;
+		PreparedStatement preparedStatement = null;
+		
+		try {
+			connection = dataSource.getConnection();
+			String query = "delete from mvc_board where bId = ?";
+			preparedStatement = connection.prepareStatement(query);
+			preparedStatement.setInt(1, Integer.parseInt(bId));
+			
+			int rn = preparedStatement.executeUpdate();
+			
+			System.out.println("S17_BDao : delete : " + rn);
+		} catch (Exception e) {
+			// TODO: handle exception
+			e.printStackTrace();
+		} finally {
+			try {
+				if(connection != null) connection.close();
+				if(preparedStatement != null) preparedStatement.close();
+				
+			} catch (Exception e2) {
+				// TODO: handle exception
+				e2.printStackTrace();
+			}
+		}
+	}
+	
+	public void modify(String bId, String bName, String bTitle, String bContent) {
+		Connection connection = null;
+		PreparedStatement preparedStatement = null;
+		
+		try {
+			connection = dataSource.getConnection();
+			String query = "update mvc_board set bName = ?, bTitle = ?, bContent = ? where bId = ?";
+			preparedStatement = connection.prepareStatement(query);
+			preparedStatement.setString(1, bName);
+			preparedStatement.setString(2, bTitle);
+			preparedStatement.setString(3, bContent);
+			preparedStatement.setInt(4, Integer.parseInt(bId));
+			
+			int rn = preparedStatement.executeUpdate();
+			
+			System.out.println("S17_BDao : modify : " + rn);
+		} catch (Exception e) {
+			// TODO: handle exception
+			e.printStackTrace();
+		} finally {
+			try {
+				if(connection != null) connection.close();
+				if(preparedStatement != null) preparedStatement.close();
+			} catch (Exception e2) {
+				// TODO: handle exception
+				e2.printStackTrace();
+			}
+		}
+		
+	}
+	
 	public S17_BDto contentView(String strId) {
 		
 		upHit(strId);
