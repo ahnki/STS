@@ -41,9 +41,8 @@ public class S17_BDao {
 			e.printStackTrace();
 		} finally {
 			try {
-				if(connection != null) connection.close();
 				if(preparedStatement != null) preparedStatement.close();
-				
+				if(connection != null) connection.close();
 			} catch (Exception e2) {
 				// TODO: handle exception
 				e2.printStackTrace();
@@ -72,8 +71,8 @@ public class S17_BDao {
 			e.printStackTrace();
 		} finally {
 			try {
-				if(connection != null) connection.close();
 				if(preparedStatement != null) preparedStatement.close();
+				if(connection != null) connection.close();
 			} catch (Exception e2) {
 				// TODO: handle exception
 				e2.printStackTrace();
@@ -118,9 +117,9 @@ public class S17_BDao {
 			e.printStackTrace();
 		} finally {
 			try {
-				if(connection != null) connection.close();
-				if(preparedStatement != null) preparedStatement.close();
 				if(resultSet != null) resultSet.close();
+				if(preparedStatement != null) preparedStatement.close();
+				if(connection != null) connection.close();				
 			} catch (Exception e2) {
 				// TODO: handle exception
 				e2.printStackTrace();
@@ -152,8 +151,8 @@ public class S17_BDao {
 			e.printStackTrace();
 		} finally {
 			try {
-				if(connection != null) connection.close();
 				if(preparedStatement != null) preparedStatement.close();
+				if(connection != null) connection.close();				
 			} catch (Exception e2) {
 				// TODO: handle exception
 				e2.printStackTrace();
@@ -204,6 +203,118 @@ public class S17_BDao {
 		return dtos;
 	}
 	
+	public S17_BDto replyView(String strId) {
+		S17_BDto dto = null;
+		
+		Connection connection = null;
+		PreparedStatement preparedStatement = null;
+		ResultSet resultSet = null;
+		
+		try {
+			connection = dataSource.getConnection();
+			String query = "select * from mvc_board where bId = ?";
+			preparedStatement = connection.prepareStatement(query);
+			preparedStatement.setInt(1, Integer.parseInt(strId));
+			resultSet = preparedStatement.executeQuery();
+			
+			if(resultSet.next()) {
+				int bId = resultSet.getInt("bId");
+				String bName = resultSet.getString("bName");
+				String bTitle = resultSet.getString("bTitle");
+				String bContent = resultSet.getNString("bContent");
+				Timestamp bDate = resultSet.getTimestamp("bDate");
+				int bHit = resultSet.getInt("bHit");
+				int bGroup = resultSet.getInt("bGroup");
+				int bStep = resultSet.getInt("bStep");
+				int bIndent = resultSet.getInt("bIndent");
+				
+				dto = new S17_BDto(bId, bName, bTitle, bContent, bDate, bHit, bGroup, bStep, bIndent);
+			} else {
+				System.out.println("replyView() : no date");
+			}
+			
+		} catch (Exception e) {
+			// TODO: handle exception
+			e.printStackTrace();
+		} finally {
+			try {
+				if(resultSet != null) resultSet.close();
+				if(preparedStatement != null) preparedStatement.close();
+				if(connection != null) connection.close();
+			} catch (Exception e2) {
+				// TODO: handle exception
+				e2.printStackTrace();
+			}
+			
+		}
+		return dto;
+	}
+	
+	public void reply(String bId, String bName, String bTitle, String bContent, String bGroup, String bStep, String bIndent) {
+		
+		replyShape(bGroup, bStep);
+		
+		Connection connection = null;
+		PreparedStatement preparedStatement = null;
+		
+		try {
+			connection = dataSource.getConnection();
+			String query = "insert into mvc_board ( bId, bName, bTitle, bContent, bGroup, bStep, bIndent) values (mvc_board_seq.nextval, ?, ?, ?, ?, ?, ?)";
+			preparedStatement = connection.prepareStatement(query);
+			
+			preparedStatement.setString(1, bName);
+			preparedStatement.setString(2, bTitle);
+			preparedStatement.setString(3, bContent);
+			preparedStatement.setInt(4, Integer.parseInt(bGroup));
+			preparedStatement.setInt(5, Integer.parseInt(bStep) + 1);
+			preparedStatement.setInt(6, Integer.parseInt(bIndent) + 1);
+			
+			int rn = preparedStatement.executeUpdate();
+			
+			System.out.println("reply insert row : " + rn);
+		} catch (Exception e) {
+			// TODO: handle exception
+			e.printStackTrace();
+		} finally {
+			try {
+				if(preparedStatement != null) preparedStatement.close();
+				if(connection != null) connection.close();
+			} catch (Exception e2) {
+				// TODO: handle exception
+				e2.printStackTrace();
+			}
+		}
+	}
+	
+	private void replyShape( String bGroup, String bStep) {
+		// TODO Auto-generated method stub
+		Connection connection = null;
+		PreparedStatement preparedStatement = null;
+		
+		try {
+			connection = dataSource.getConnection();
+			String query = "update mvc_board set bStep = bStep + 1 where bGroup = ? and bStep > ?";
+			preparedStatement = connection.prepareStatement(query);
+			preparedStatement.setInt(1, Integer.parseInt(bGroup));
+			preparedStatement.setInt(2, Integer.parseInt(bStep));
+			
+			int rn = preparedStatement.executeUpdate();
+			
+			System.out.println("S17_BDao.replyShape() update : " + rn);
+		} catch (Exception e) {
+			// TODO: handle exception
+			e.printStackTrace();
+		} finally {
+			try {
+				if(preparedStatement != null) preparedStatement.close();
+				if(connection != null) connection.close();
+			} catch (Exception e2) {
+				// TODO: handle exception
+				e2.printStackTrace();
+			}
+		}
+	}
+	
 	private void upHit(String bId) {
 		Connection connection = null;
 		PreparedStatement preparedStatement = null;
@@ -222,8 +333,8 @@ public class S17_BDao {
 			e.printStackTrace();
 		} finally {
 			try {
+				if(preparedStatement != null) preparedStatement.close();
 				if(connection != null) connection.close();
-				if(preparedStatement != null) preparedStatement.close();				
 			} catch (Exception e2) {
 				// TODO: handle exception
 				e2.printStackTrace();
