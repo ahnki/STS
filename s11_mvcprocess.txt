@@ -1,0 +1,9 @@
+- MVC 처리 프로세스
+
+1. client의 요청을 web.xml이 받아 appServlet에 보내는데 이때
+2. DispatcherServlet이 받는다
+3. 그러면서 참조하는게 /src/main/webapp/WEB-INF/spring/appServlet/servlet-context.xml을 참조하여
+4. 제외하도록 설정된 공간을 제외한다.
+
+server.xml
+Context path가 설정되어 있다.
