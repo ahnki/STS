@@ -7,7 +7,7 @@
 <title>Insert title here</title>
 </head>
 <body>
-<h3>buy_ticket_end.jsp 입니다. </h3><br />
+<h3>s22_buyTicketEnd.jsp 입니다. </h3><br />
 
 ${ticketInfo.consumerId } <br />
 ${ticketInfo.amount } <br />

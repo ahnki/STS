@@ -3,7 +3,7 @@ package com.spring.ex;
 public class S22_TicketDto {
 
 	String consumerId;
-	int countNum;
+	int amount;
 	
 	
 	public String getConsumerId() {
@@ -12,11 +12,11 @@ public class S22_TicketDto {
 	public void setConsumerId(String consumerId) {
 		this.consumerId = consumerId;
 	}
-	public int getCountNum() {
-		return countNum;
+	public int getAmount() {
+		return amount;
 	}
-	public void setCountNum(int countNum) {
-		this.countNum = countNum;
-	}
-
+	public void setAmount(int amount) {
+		this.amount = amount;
+	}	
+	
 }
